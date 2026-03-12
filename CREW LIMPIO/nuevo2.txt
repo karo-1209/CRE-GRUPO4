@@ -6,6 +6,7 @@ dir
 
 para el fronted :
 cd sesion_app
+npm install sweetalert2
 npm start
 
 Instalar dependencias del frotend:

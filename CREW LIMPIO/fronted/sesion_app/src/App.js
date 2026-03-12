@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import RecuperarPassword from "./pages/RecuperarPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Auditoria from "./pages/Auditoria";
+// 1. IMPORTA EL SENSOR QUE CREAMOS
+import InactivityHandler from "./components/InactivityHandler"; 
 
 function App() {
   const [usuario, setUsuario] = useState(
@@ -20,17 +22,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Públicas */}
+        {/* Rutas Públicas - No llevan sensor */}
         <Route path="/" element={<Login onLogin={setUsuario} />} />
         <Route path="/recuperar" element={<RecuperarPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Protegida */}
+        {/* Rutas Protegidas - AQUÍ ENVOLVEMOS CON EL SENSOR */}
         <Route
           path="/dashboard"
           element={
             usuario ? (
-              <Dashboard usuario={usuario} onLogout={cerrarSesion} />
+              <InactivityHandler onLogout={cerrarSesion}>
+                <Dashboard usuario={usuario} onLogout={cerrarSesion} />
+              </InactivityHandler>
             ) : (
               <Navigate to="/" replace />
             )
@@ -41,14 +45,16 @@ function App() {
           path="/auditoria"
           element={
             usuario ? (
-              <Auditoria />
+              <InactivityHandler onLogout={cerrarSesion}>
+                <Auditoria />
+              </InactivityHandler>
             ) : (
               <Navigate to="/" replace />
             )
           }
         />
 
-        {/* Cualquier otra ruta */}
+        {/* Redirección por defecto */}
         <Route path="*" element={<Navigate to={usuario ? "/dashboard" : "/"} replace />} />
       </Routes>
     </BrowserRouter>

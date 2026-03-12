@@ -1,0 +1,16 @@
+para correr el backend
+cd "C:\Users\migue\OneDrive\Desktop\CREW\backend"
+dir
+.\mvnw.cmd spring-boot:run
+
+
+para el fronted :
+cd sesion_app
+npm start
+
+Instalar dependencias del frotend:
+npm start
+
+para saber donde te encuentras:
+dir
+

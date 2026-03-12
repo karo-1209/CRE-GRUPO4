@@ -1,0 +1,218 @@
+.dash-bg{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(99,102,241,.25), transparent 60%),
+    radial-gradient(1000px 500px at 90% 30%, rgba(16,185,129,.20), transparent 55%),
+    linear-gradient(180deg, #0b1020, #070a12);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.dash-shell{
+  width: 100%;
+  max-width: 980px;
+}
+
+.dash-header{
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dash-brand{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dash-logo{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  box-shadow: 0 10px 25px rgba(99,102,241,0.35);
+}
+
+.dash-brand h1{
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: .4px;
+}
+
+.dash-brand p{
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: rgba(229,231,235,0.75);
+}
+
+.dash-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dash-btn{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: #e5e7eb;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease, background .12s ease;
+}
+
+.dash-btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+
+.dash-btn.ghost{
+  border-color: rgba(99,102,241,0.35);
+}
+
+.dash-btn.danger{
+  background: rgba(239,68,68,0.14);
+  border-color: rgba(239,68,68,0.28);
+  color: #fecaca;
+}
+
+.dash-grid{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 16px;
+}
+
+@media (max-width: 840px){
+  .dash-grid{ grid-template-columns: 1fr; }
+}
+
+.dash-card{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px);
+}
+
+.dash-card-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.dash-card-title h2{
+  margin: 0;
+  font-size: 18px;
+}
+
+.dash-sub{
+  font-size: 12px;
+  color: rgba(229,231,235,0.65);
+}
+
+.dash-pill{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,14,26,0.55);
+  color: rgba(229,231,235,0.9);
+}
+
+.dash-info{
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dash-info-item{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,14,26,0.55);
+}
+
+.dash-info-item .k{
+  font-size: 12px;
+  color: rgba(229,231,235,0.65);
+}
+
+.dash-info-item .v{
+  font-size: 13px;
+  color: rgba(229,231,235,0.95);
+  font-weight: 600;
+}
+
+.dash-info-item .v.ok{ color: rgba(134,239,172,0.95); }
+.dash-info-item .v.bad{ color: rgba(252,165,165,0.95); }
+
+.dash-hint{
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(229,231,235,0.75);
+  line-height: 1.4;
+}
+
+.dash-actions-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.dash-tile{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,14,26,0.55);
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+}
+
+.dash-tile:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  border-color: rgba(99,102,241,0.35);
+}
+
+.tile-icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.tile-title{
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.tile-desc{
+  font-size: 12px;
+  color: rgba(229,231,235,0.65);
+}
+
+.dash-footer{
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(229,231,235,0.55);
+  text-align: center;
+}

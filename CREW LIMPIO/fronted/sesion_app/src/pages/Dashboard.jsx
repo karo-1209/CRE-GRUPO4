@@ -17,6 +17,10 @@ export default function Dashboard({ usuario, onLogout }) {
 
   if (!usuario) return null;
 
+// Cambia esto en Dashboard.jsx
+const nombreRol = usuario.rol?.nombre || usuario.rol;
+const isAdmin = nombreRol === "Admin"; // <-- Asegúrate que sea "Admin" como en tu SQL
+
   return (
     <div className="dash-bg">
       <div className="dash-shell">
@@ -31,9 +35,11 @@ export default function Dashboard({ usuario, onLogout }) {
           </div>
 
           <div className="dash-actions">
-            <button className="dash-btn ghost" onClick={() => navigate("/auditoria")}>
-              Ver auditoría
-            </button>
+            {isAdmin && (
+              <button className="dash-btn ghost" onClick={() => navigate("/auditoria")}>
+                Ver auditoría
+              </button>
+            )}
             <button className="dash-btn danger" onClick={handleLogout}>
               Cerrar sesión
             </button>
@@ -42,11 +48,11 @@ export default function Dashboard({ usuario, onLogout }) {
 
         {/* Content */}
         <main className="dash-grid">
-          {/* Welcome card */}
           <section className="dash-card">
             <div className="dash-card-title">
               <h2>Bienvenido, {usuario.nombre}</h2>
-              <span className="dash-pill">{usuario.rol?.nombre || "Usuario"}</span>
+              {/* CORRECCIÓN: Mostramos solo el nombre del rol, no el objeto completo */}
+              <span className="dash-pill">{nombreRol || "Usuario"}</span>
             </div>
 
             <div className="dash-info">
@@ -66,36 +72,43 @@ export default function Dashboard({ usuario, onLogout }) {
               </div>
             </div>
 
-            <div className="dash-hint">
-              Usa el botón <b>“Ver auditoría”</b> para revisar accesos y acciones críticas del sistema.
-            </div>
+            {isAdmin && (
+              <div className="dash-hint">
+                Usa el botón <b>“Ver auditoría”</b> para revisar accesos y acciones críticas del sistema.
+              </div>
+            )}
           </section>
 
-          {/* Quick actions */}
           <section className="dash-card">
             <div className="dash-card-title">
               <h2>Acciones rápidas</h2>
-              <span className="dash-sub">Administración</span>
+              <span className="dash-sub">
+                {isAdmin ? "Administración" : "Consultas"}
+              </span>
             </div>
 
             <div className="dash-actions-grid">
-              <button className="dash-tile" onClick={() => navigate("/auditoria")}>
-                <div className="tile-icon">📋</div>
-                <div className="tile-text">
-                  <div className="tile-title">Auditoría</div>
-                  <div className="tile-desc">Ver actividad del sistema</div>
-                </div>
-              </button>
+              {isAdmin && (
+                <button className="dash-tile" onClick={() => navigate("/auditoria")}>
+                  <div className="tile-icon">📋</div>
+                  <div className="tile-text">
+                    <div className="tile-title">Auditoría</div>
+                    <div className="tile-desc">Ver actividad del sistema</div>
+                  </div>
+                </button>
+              )}
 
-              <button className="dash-tile" onClick={() => alert("Aquí puedes agregar Gestión de Usuarios si lo implementas en frontend")}>
-                <div className="tile-icon">👥</div>
-                <div className="tile-text">
-                  <div className="tile-title">Usuarios</div>
-                  <div className="tile-desc">Desactivar / desbloquear</div>
-                </div>
-              </button>
+              {isAdmin && (
+                <button className="dash-tile" onClick={() => alert("Módulo de Gestión de Usuarios")}>
+                  <div className="tile-icon">👥</div>
+                  <div className="tile-text">
+                    <div className="tile-title">Usuarios</div>
+                    <div className="tile-desc">Desactivar / desbloquear</div>
+                  </div>
+                </button>
+              )}
 
-              <button className="dash-tile" onClick={() => alert("Aquí puedes agregar reportes o estadísticas si lo deseas")}>
+              <button className="dash-tile" onClick={() => alert("Módulo de Reportes")}>
                 <div className="tile-icon">📈</div>
                 <div className="tile-text">
                   <div className="tile-title">Reportes</div>

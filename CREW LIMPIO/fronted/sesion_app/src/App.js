@@ -6,10 +6,12 @@ import Dashboard from "./pages/Dashboard";
 import RecuperarPassword from "./pages/RecuperarPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Auditoria from "./pages/Auditoria";
-// 1. IMPORTA EL SENSOR QUE CREAMOS
-import InactivityHandler from "./components/InactivityHandler"; 
+import Usuarios from "./pages/Usuarios";
+
+import InactivityHandler from "./components/InactivityHandler";
 
 function App() {
+
   const [usuario, setUsuario] = useState(
     JSON.parse(localStorage.getItem("usuario"))
   );
@@ -22,12 +24,30 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas Públicas - No llevan sensor */}
-        <Route path="/" element={<Login onLogin={setUsuario} />} />
-        <Route path="/recuperar" element={<RecuperarPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Rutas Protegidas - AQUÍ ENVOLVEMOS CON EL SENSOR */}
+        {/* ================= */}
+        {/* RUTAS PUBLICAS */}
+        {/* ================= */}
+
+        <Route
+          path="/"
+          element={<Login onLogin={setUsuario} />}
+        />
+
+        <Route
+          path="/recuperar"
+          element={<RecuperarPassword />}
+        />
+
+        <Route
+          path="/reset-password"
+          element={<ResetPassword />}
+        />
+
+        {/* ================= */}
+        {/* DASHBOARD */}
+        {/* ================= */}
+
         <Route
           path="/dashboard"
           element={
@@ -40,6 +60,10 @@ function App() {
             )
           }
         />
+
+        {/* ================= */}
+        {/* AUDITORIA */}
+        {/* ================= */}
 
         <Route
           path="/auditoria"
@@ -54,8 +78,37 @@ function App() {
           }
         />
 
-        {/* Redirección por defecto */}
-        <Route path="*" element={<Navigate to={usuario ? "/dashboard" : "/"} replace />} />
+        {/* ================= */}
+        {/* HU9 - USUARIOS */}
+        {/* ================= */}
+
+        <Route
+          path="/usuarios"
+          element={
+            usuario ? (
+              <InactivityHandler onLogout={cerrarSesion}>
+                <Usuarios />
+              </InactivityHandler>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+
+        {/* ================= */}
+        {/* REDIRECCION GLOBAL */}
+        {/* ================= */}
+
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to={usuario ? "/dashboard" : "/"}
+              replace
+            />
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );

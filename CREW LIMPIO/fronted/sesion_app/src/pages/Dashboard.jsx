@@ -17,9 +17,9 @@ export default function Dashboard({ usuario, onLogout }) {
 
   if (!usuario) return null;
 
-// Cambia esto en Dashboard.jsx
-const nombreRol = usuario.rol?.nombre || usuario.rol;
-const isAdmin = nombreRol === "Admin"; // <-- Asegúrate que sea "Admin" como en tu SQL
+  // Cambia esto en Dashboard.jsx
+  const nombreRol = usuario.rol?.nombre || usuario.rol;
+  const isAdmin = nombreRol === "Admin"; // <-- Asegúrate que sea "Admin" como en tu SQL
 
   return (
     <div className="dash-bg">
@@ -50,7 +50,7 @@ const isAdmin = nombreRol === "Admin"; // <-- Asegúrate que sea "Admin" como en
         <main className="dash-grid">
           <section className="dash-card">
             <div className="dash-card-title">
-              <h2>Bienvenido, {usuario.nombre}</h2>
+              <h2>Bienvenido, {usuario.nombre || usuario.username}</h2>
               {/* CORRECCIÓN: Mostramos solo el nombre del rol, no el objeto completo */}
               <span className="dash-pill">{nombreRol || "Usuario"}</span>
             </div>
@@ -99,11 +99,11 @@ const isAdmin = nombreRol === "Admin"; // <-- Asegúrate que sea "Admin" como en
               )}
 
               {isAdmin && (
-                <button className="dash-tile" onClick={() => alert("Módulo de Gestión de Usuarios")}>
+                <button className="dash-tile" onClick={() => navigate("/usuarios")}>
                   <div className="tile-icon">👥</div>
                   <div className="tile-text">
                     <div className="tile-title">Usuarios</div>
-                    <div className="tile-desc">Desactivar / desbloquear</div>
+                    <div className="tile-desc">Gestionar usuarios del sistema</div>
                   </div>
                 </button>
               )}

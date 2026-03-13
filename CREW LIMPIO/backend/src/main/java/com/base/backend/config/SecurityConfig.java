@@ -25,7 +25,8 @@ public class SecurityConfig {
             }))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/admin/auditoria").permitAll()
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/admin/auditoria").permitAll() //  agregar esto
                 .anyRequest().authenticated()
             );
 
